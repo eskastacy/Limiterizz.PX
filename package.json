@@ -1,0 +1,25 @@
+{
+  "name": "limiterizz-px",
+  "productName": "Limiterizz.PX",
+  "version": "1.0.0",
+  "description": "Roblox FPS Unlocker & Hard Performance Optimizer",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"tests/*.test.js\"", 
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Eska Stacy (EskaProject-X)",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^45.3.3",
+    "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "electron-store": "^12.0.0",
+    "fast-xml-parser": "^5.12.1",
+    "regedit": "^5.1.4"
+  }
+}

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limiterizz.PX: Performance Console</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- ============ TOP TITLEBAR ============ -->
+    <header id="titlebar">
+      <div class="titlebar-drag-area">
+        <div class="titlebar-brand-group">
+          <span class="titlebar-brand-title">LIMITERIZZ.PX</span>
+          <span class="titlebar-brand-tag">PERFORMANCE CONSOLE</span>
+        </div>
+      </div>
+      <div class="titlebar-controls">
+        <button class="win-btn" id="btn-minimize" aria-label="Minimize Window">
+          <svg viewBox="0 0 10 2" fill="currentColor">
+            <rect width="10" height="1.8" />
+          </svg>
+        </button>
+        <button class="win-btn" id="btn-maximize" aria-label="Maximize Window">
+          <svg viewBox="0 0 10 10" fill="none" stroke="currentColor">
+            <rect x="0.5" y="0.5" width="9" height="9" stroke-width="1.2" />
+          </svg>
+        </button>
+        <button class="win-btn close-btn" id="btn-close" aria-label="Close Window">
+          <svg viewBox="0 0 10 10" stroke="currentColor">
+            <line x1="1" y1="1" x2="9" y2="9" stroke-width="1.2" />
+            <line x1="9" y1="1" x2="1" y2="9" stroke-width="1.2" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ MAIN WORKSPACE ============ -->
+    <div id="main-workspace">
+      <!-- SIDEBAR -->
+      <aside id="sidebar">
+        <div>
+          <!-- Brand Header -->
+          <div class="sidebar-brand-box">
+            <img src="../assets/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-brand-text">
+              <div class="sidebar-brand-title">
+                <span class="sidebar-brand-script">Limiterizz</span>
+                <span class="sidebar-brand-suffix">.PX</span>
+              </div>
+              <span class="sidebar-brand-tagline">P E R F O R M A N C E   C O N S O L E</span>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="sidebar-nav-container">
+            <div class="nav-section-title">PIPELINE</div>
+            <ul class="nav-menu">
+              <li>
+                <a href="#overview" class="nav-item active" data-page="page-overview">
+                  <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z" /></svg>
+                  <span>Overview</span>
+                </a>
+              </li>
+              <li>
+                <a href="#fps-unlocker" class="nav-item" data-page="page-fps">
+                  <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+                  <span>FPS Unlocker</span>
+                </a>
+              </li>
+              <li>
+                <a href="#optimizer" class="nav-item" data-page="page-optimizer">
+                  <svg viewBox="0 0 24 24"><path d="M12 2v4 M12 18v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4 M4.93 19.07l2.83-2.83 M16.24 7.76l2.83-2.83" /></svg>
+                  <span>Optimizer</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="nav-section-title">MAINTENANCE</div>
+            <ul class="nav-menu">
+              <li>
+                <a href="#restore" class="nav-item" data-page="page-restore">
+                  <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5" /></svg>
+                  <span>System Restore</span>
+                </a>
+              </li>
+              <li>
+                <a href="#journal" class="nav-item" data-page="page-journal">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" /></svg>
+                  <span>Change Journal</span>
+                </a>
+              </li>
+              <li>
+                <a href="#settings" class="nav-item" data-page="page-settings">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+                  <span>Settings & About</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Developer Profile Card (Exact Stellary.PX Architecture) -->
+        <div class="dev-profile-card">
+          <div class="dev-header-row">
+            <div class="dev-avatar">
+              <img src="../assets/avatar.jpg" alt="Eska Stacy" class="dev-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="dev-avatar-fallback" style="display:none;">EK</span>
+            </div>
+            <div class="dev-meta">
+              <span class="dev-name">Eska Stacy</span>
+              <span class="dev-handle">@jar.ajhi_</span>
+            </div>
+          </div>
+          <div class="dev-hairline"></div>
+          <div class="dev-brand-badge">E S K A P R O J E C T - X</div>
+          <div class="dev-social-grid">
+            <button class="social-icon-btn" data-url="https://linktr.ee/eskastacy_" title="Linktree" aria-label="Linktree">
+              <svg viewBox="0 0 24 24"><path d="M12 21V9 M12 9L5 3 M12 9V2.5 M12 9L19 3" /></svg>
+            </button>
+            <button class="social-icon-btn" data-url="https://whatsapp.com/channel/0029VbAowqoC1Fu3uTLcRe1n" title="WhatsApp Channel" aria-label="WhatsApp Channel">
+              <svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z M8.9 8c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.7 4.2 3.7 1.9.8 2.3.6 2.7.6.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1l-.6-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4z" /></svg>
+            </button>
+            <button class="social-icon-btn" data-url="https://www.tiktok.com/@jarachyy_?_r=1&_t=ZS-99b76hsvJha" title="TikTok" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M14.5 3v9.4a4.1 4.1 0 1 1-3.2-4 M14.5 3c.4 1.9 1.8 3.1 3.7 3.3" /></svg>
+            </button>
+            <button class="social-icon-btn" data-url="https://discord.gg/eZSNxNghu" title="Discord" aria-label="Discord">
+              <svg viewBox="0 0 24 24"><path d="M8.5 6.5c2.3-.7 4.7-.7 7 0 M7 18c-1.5-1.2-2.6-3-3-5.5.5-2.7 1.8-5 3.6-6.6l1.6-.6 1 1.7c1.2-.2 2.4-.2 3.6 0l1-1.7 1.6.6c1.8 1.6 3.1 3.9 3.6 6.6-.4 2.5-1.5 4.3-3 5.5l-1.6-2.2 M7 18l-1.5 2.5 M17 18l1.5 2.5 M9.5 12.5h.01 M14.5 12.5h.01" /></svg>
+            </button>
+            <button class="social-icon-btn" data-url="https://www.instagram.com/jar.ajhi_" title="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z M12 8.5a3.5 3.5 0 1 0 .01 0z M17.2 6.8h.01" /></svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <main id="content-area">
+
+        <!-- ================= PAGE 1: OVERVIEW (MATCHING OVERVIEWVIEW.XAML) ================= -->
+        <section id="page-overview" class="page-view active">
+          <!-- Top Hero + System Load Grid -->
+          <div class="overview-top-grid">
+            <!-- Hero Card (Raised Card with Engraved Sigil) -->
+            <div class="card-raised overview-hero-card">
+              <div class="overview-hero-content">
+                <div>
+                  <div class="card-eyebrow">PIPELINE / 01</div>
+                  <h2 class="page-header-title" style="font-size: 26px; margin: 4px 0 2px 0;">Roblox FPS Pipeline</h2>
+                  <div class="hero-status-pill">
+                    <span class="status-dot" id="dash-status-dot"></span>
+                    <span class="hero-target-text" id="dash-active-fps-status">Target: 9999 FPS · Uncapped</span>
+                  </div>
+                  <div class="card-desc" id="dash-bullet-cap" style="margin-top: 6px;">
+                    GlobalBasicSettings_13.xml verified. Pristine backup protected.
+                  </div>
+                </div>
+
+                <div class="hero-actions-row">
+                  <button class="btn-primary" id="btn-hero-unlock">
+                    <span>Breaking FPS</span>
+                  </button>
+                  <button class="btn-ghost" id="btn-hero-restore">
+                    <span>Restore default</span>
+                  </button>
+                  <button class="btn-icon" id="btn-hero-refresh" title="Re-verify pipeline">
+                    <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.3 M21 3v6h-6" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Authentic Cybersigilism Geometric Vector Canvas from Stellary.PX OverviewView.xaml -->
+              <svg class="engraved-sigil-canvas" viewBox="0 0 236 232" fill="none">
+                <path d="M118 22 V212" stroke="#3A3A44" stroke-width="1" />
+                <path d="M118 46 C 96 46, 82 32, 70 8" stroke="#4A4A55" stroke-width="1" />
+                <path d="M118 46 C 140 46, 154 32, 166 8" stroke="#4A4A55" stroke-width="1" />
+                <path d="M118 76 C 86 76, 68 54, 52 22" stroke="#3C3C46" stroke-width="1" />
+                <path d="M118 76 C 150 76, 168 54, 184 22" stroke="#3C3C46" stroke-width="1" />
+                <path d="M118 106 C 78 106, 56 80, 36 40" stroke="#34343D" stroke-width="1" />
+                <path d="M118 106 C 158 106, 180 80, 200 40" stroke="#34343D" stroke-width="1" />
+                <path d="M118 136 C 70 136, 44 104, 22 58" stroke="#2E2E36" stroke-width="1" />
+                <path d="M118 136 C 166 136, 192 104, 214 58" stroke="#2E2E36" stroke-width="1" />
+                <circle cx="118" cy="18" r="4" stroke="#55555F" stroke-width="1" />
+                <polygon points="118,162 111,174 118,186 125,174" stroke="#4A4A55" stroke-width="1" />
+                <polygon points="118,196 114,203 118,210 122,203" stroke="#3A3A44" stroke-width="1" />
+                <circle cx="118" cy="228" r="2.5" fill="#3E3E48" />
+              </svg>
+            </div>
+
+            <!-- System Load Card (Ring Gauge from Stellary.PX) -->
+            <div class="card system-load-card">
+              <div class="card-title-row">
+                <span class="card-eyebrow">SYSTEM LOAD</span>
+                <span style="font-family: var(--f-mono); font-size: 9.5px; color: var(--c-dim);">0.5 s</span>
+              </div>
+
+              <div class="gauge-wrap">
+                <svg viewBox="0 0 100 100" width="126" height="126" style="max-width: 126px; max-height: 126px; width: 100%; height: auto; aspect-ratio: 1 / 1;">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#383842" stroke-width="8" />
+                  <circle id="gauge-circle-progress" cx="50" cy="50" r="40" fill="none" stroke="#D8D8E1" stroke-width="8"
+                          stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round"
+                          transform="rotate(-90 50 50)" style="transition: stroke-dashoffset 0.4s ease;" />
+                </svg>
+                <div class="gauge-center-stats">
+                  <span class="gauge-pct-text" id="gauge-text-pct">--%</span>
+                  <span class="gauge-label-text">CPU</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="hairline" style="margin: 8px 0 10px 0;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
+                  <span style="color: var(--c-dim);">Memory</span>
+                  <span id="bar-ram-val" style="font-family: var(--f-mono); font-size: 10px; color: var(--c-muted);">-- / -- GB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Pulse + Pipeline Status Grid -->
+          <div class="overview-bottom-grid">
+            <!-- System Pulse (Live Waveform Chart) -->
+            <div class="card pulse-chart-card">
+              <div class="card-title-row">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                  <span class="card-headline">System pulse</span>
+                  <div style="display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--c-dim);">
+                    <span style="width: 5px; height: 5px; border-radius: 50%; background: #D8D8E1;"></span>
+                    <span>CPU</span>
+                    <span style="width: 5px; height: 5px; border-radius: 50%; background: #6E6E79; margin-left: 6px;"></span>
+                    <span>RAM</span>
+                  </div>
+                </div>
+                <span id="chart-subtext" style="font-size: 9.5px; color: var(--c-dim); font-family: var(--f-mono);">Live telemetry</span>
+              </div>
+
+              <canvas id="telemetry-chart" class="pulse-canvas" width="560" height="140"></canvas>
+            </div>
+
+            <!-- Engine Pipeline Status Card -->
+            <div class="card process-engine-card">
+              <div>
+                <div class="card-eyebrow" style="margin-bottom: 12px;">ENGINE PIPELINE</div>
+                <div class="engine-data-row">
+                  <span class="engine-data-label">Roblox Engine</span>
+                  <span class="engine-data-value" id="dash-bullet-install">Detected</span>
+                </div>
+                <div class="engine-data-row">
+                  <span class="engine-data-label">Process State</span>
+                  <span class="engine-data-value" id="bar-roblox-val">Not Running</span>
+                </div>
+                <div class="engine-data-row">
+                  <span class="engine-data-label">Framerate Cap</span>
+                  <span class="engine-data-value" id="dash-stat-roblox-fps">-- FPS</span>
+                </div>
+                <div class="engine-data-row">
+                  <span class="engine-data-label">Pristine Backup</span>
+                  <span class="engine-data-value" id="dash-bullet-backup">Protected</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="hairline"></div>
+                <div style="font-size: 10px; color: var(--c-dim); line-height: 1.5;">
+                  All parameters verified with atomic file replacement and SHA-256 integrity logging.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 2: FPS UNLOCKER ================= -->
+        <section id="page-fps" class="page-view">
+          <div class="page-header-block">
+            <div class="page-header-eyebrow">CONFIGURATION / FPS</div>
+            <h2 class="page-header-title">Roblox Framerate Limiter</h2>
+            <div class="page-header-desc">
+              Direct XML injection targeting Roblox FramerateCap parameter. Supports uncapped 9999 FPS target with pristine backup preservation.
+            </div>
+          </div>
+
+          <!-- Configuration Card Raised -->
+          <div class="card-raised" style="margin-bottom: 14px;">
+            <div class="card-eyebrow">XML TARGET PARAMETER</div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0 16px 0;">
+              <div>
+                <div style="font-size: 11px; color: var(--c-dim);">Target Config File</div>
+                <div style="font-family: var(--f-mono); font-size: 11px; color: var(--c-text); margin-top: 2px;" id="fps-config-path-text">
+                  %LOCALAPPDATA%\Roblox\GlobalBasicSettings_13.xml
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 10px; color: var(--c-dim); text-transform: uppercase;">Current Configuration</div>
+                <div style="font-family: var(--f-body); font-weight: 300; font-size: 32px; color: var(--c-text); line-height: 1;" id="fps-current-numeral">
+                  -- FPS
+                </div>
+              </div>
+            </div>
+
+            <div class="hairline"></div>
+
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <select class="select-input" id="fps-dropdown-select" style="min-width: 240px;">
+                <option value="9999" selected>9999 FPS (Uncapped Target)</option>
+                <option value="360">360 FPS (Competitive)</option>
+                <option value="240">240 FPS (240Hz Display)</option>
+                <option value="165">165 FPS (165Hz Display)</option>
+                <option value="144">144 FPS (Standard 144Hz)</option>
+                <option value="60">60 FPS (Roblox Default)</option>
+              </select>
+              <button class="btn-primary" id="btn-apply-selected-fps">
+                <span>Apply Selected Cap</span>
+              </button>
+              <button class="btn-ghost" id="btn-revert-fps-direct">
+                <span>Revert to Pristine Original</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Engine Parameters Inspector -->
+          <div class="card">
+            <div class="card-eyebrow" style="margin-bottom: 12px;">ENGINE PARAMETERS INSPECTOR</div>
+            <div id="fps-inspector-body" style="font-size: 11.5px; color: var(--c-muted); line-height: 1.8;">
+              Detecting Roblox parameters...
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 3: PERFORMANCE OPTIMIZER (MATCHING SYSTEMVIEW.XAML) ================= -->
+        <section id="page-optimizer" class="page-view">
+          <div class="page-header-block">
+            <div class="page-header-eyebrow">SYSTEM / HARD PERFORMANCE</div>
+            <h2 class="page-header-title">Process & Hardware Optimizations</h2>
+            <div class="page-header-desc">
+              Measured, non-invasive system tweaks targeting Roblox scheduling, GPU affinity, and Windows overhead. Every change is reversible.
+            </div>
+          </div>
+
+          <!-- Top Action Bar -->
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 500; font-size: 13px; color: var(--c-text);">All Performance Tweaks</div>
+              <div style="font-size: 11px; color: var(--c-muted);">Apply CPU priority, discrete GPU preference, memory page priority, and Windows power plan.</div>
+            </div>
+            <button class="btn-primary" id="btn-opt-apply-all">
+              <span>Apply all optimizations</span>
+            </button>
+          </div>
+
+          <!-- 2x2 Optimization Cards Grid (Matching Stellary.PX SystemView.xaml) -->
+          <div class="opt-grid-2col">
+            <!-- 1. CPU Priority Class -->
+            <div class="card-raised">
+              <div class="opt-card-header">
+                <div class="card-eyebrow">CPU SCHEDULING</div>
+                <div class="opt-card-title">Roblox Process Priority Class</div>
+              </div>
+              <div class="card-desc">
+                Sets <code>CpuPriorityClass=3</code> (High) in Image File Execution Options. Secures scheduling quanta without unstable Realtime priority.
+              </div>
+              <div class="opt-card-actions">
+                <button class="btn-primary" id="btn-opt-cpu">Apply CPU</button>
+                <button class="btn-ghost" id="btn-restore-cat-cpu">Restore</button>
+              </div>
+            </div>
+
+            <!-- 2. Discrete High Performance GPU -->
+            <div class="card-raised">
+              <div class="opt-card-header">
+                <div class="card-eyebrow">GRAPHICS PIPELINE</div>
+                <div class="opt-card-title">Discrete High Performance GPU</div>
+              </div>
+              <div class="card-desc">
+                Registers Roblox Player in DirectX <code>UserGpuPreferences</code> with <code>GpuPreference=2</code> to eliminate integrated GPU fallback.
+              </div>
+              <div class="opt-card-actions">
+                <button class="btn-primary" id="btn-opt-gpu">Apply GPU</button>
+                <button class="btn-ghost" id="btn-restore-cat-gpu">Restore</button>
+              </div>
+            </div>
+
+            <!-- 3. RAM Memory Page Priority -->
+            <div class="card-raised">
+              <div class="opt-card-header">
+                <div class="card-eyebrow">MEMORY MANAGEMENT</div>
+                <div class="opt-card-title">RAM Page Priority (Level 5)</div>
+              </div>
+              <div class="card-desc">
+                Configures memory allocation page priority to Level 5. Prevents background disk paging and working set stutter during gaming sessions.
+              </div>
+              <div class="opt-card-actions">
+                <button class="btn-primary" id="btn-opt-ram">Apply RAM</button>
+                <button class="btn-ghost" id="btn-restore-cat-ram">Restore</button>
+              </div>
+            </div>
+
+            <!-- 4. Windows Power & Game Mode -->
+            <div class="card-raised">
+              <div class="opt-card-header">
+                <div class="card-eyebrow">OPERATING SYSTEM</div>
+                <div class="opt-card-title">Power Scheme & Game Mode</div>
+              </div>
+              <div class="card-desc">
+                Activates High Performance power plan, verifies Windows Game Mode, and removes GameDVR background capture recording latency.
+              </div>
+              <div class="opt-card-actions">
+                <button class="btn-primary" id="btn-opt-windows">Apply Windows</button>
+                <button class="btn-ghost" id="btn-restore-cat-win">Restore</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 4: SYSTEM RESTORE ================= -->
+        <section id="page-restore" class="page-view">
+          <div class="page-header-block">
+            <div class="page-header-eyebrow">MAINTENANCE / ROLLBACK</div>
+            <h2 class="page-header-title">System Restore & Revert</h2>
+            <div class="page-header-desc">
+              Full and selective rollback capability. Reverts modified settings back to their pristine baseline recorded in the Change Journal.
+            </div>
+          </div>
+
+          <!-- Full Restore Hero Card -->
+          <div class="card-raised" style="border-color: #5A2020; margin-bottom: 14px;">
+            <div class="card-title-row">
+              <span class="card-eyebrow" style="color: var(--c-danger-text);">PRISTINE STATE REVERT</span>
+              <span style="font-size: 8.5px; border: 1px solid #7A2E2E; padding: 2px 6px; border-radius: 2px; color: var(--c-danger-text);">SAFETY SHIELD</span>
+            </div>
+            <h3 style="font-size: 16px; font-weight: 500; color: var(--c-text); margin-bottom: 6px;">Restore Everything to Default</h3>
+            <div class="card-desc" style="color: #D6A8A8; margin-bottom: 18px;">
+              Reverts <code>GlobalBasicSettings_13.xml</code> to pristine backup, restores CPU/GPU/RAM registry entries, and rolls back Windows power scheme.
+            </div>
+            <button class="btn-danger" id="btn-restore-all">
+              <span>Restore Everything</span>
+            </button>
+          </div>
+
+          <!-- Selective Category Rollback -->
+          <div class="card" style="margin-bottom: 14px;">
+            <div class="card-eyebrow" style="margin-bottom: 12px;">SELECTIVE ROLLBACK</div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn-ghost" id="btn-restore-cat-fps">Restore FPS Only</button>
+              <button class="btn-ghost" id="btn-restore-cat-cpu-sel">Restore CPU Only</button>
+              <button class="btn-ghost" id="btn-restore-cat-gpu-sel">Restore GPU Only</button>
+              <button class="btn-ghost" id="btn-restore-cat-ram-sel">Restore RAM Only</button>
+              <button class="btn-ghost" id="btn-restore-cat-win-sel">Restore Windows Only</button>
+            </div>
+          </div>
+
+          <!-- Archived Backups -->
+          <div class="card">
+            <div class="card-eyebrow" style="margin-bottom: 12px;">ARCHIVED BACKUPS</div>
+            <div id="restore-backup-list">
+              Loading backups...
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 5: CHANGE JOURNAL ================= -->
+        <section id="page-journal" class="page-view">
+          <div class="page-header-block">
+            <div class="page-header-eyebrow">AUDIT / CHANGE LOG</div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <div>
+                <h2 class="page-header-title">Persistent Change Journal</h2>
+                <div class="page-header-desc">
+                  Every modification made by Limiterizz.PX is recorded with timestamps, original values, and verification states.
+                </div>
+              </div>
+              <button class="btn-ghost" id="btn-export-journal-desktop">
+                <span>Export to Desktop</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div id="journal-records-list" style="max-height: 480px; overflow-y: auto;">
+              Loading journal records...
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 6: SETTINGS & ABOUT (MATCHING SETTINGSVIEW.XAML) ================= -->
+        <section id="page-settings" class="page-view">
+          <div class="page-header-block">
+            <div class="page-header-eyebrow">SYSTEM / SETTINGS</div>
+            <h2 class="page-header-title">Application Settings & Machine Identity</h2>
+            <div class="page-header-desc">
+              Local configuration, hardware identifiers, and developer attribution that ships with the build.
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+            <!-- Left Column: Machine & Privacy -->
+            <div>
+              <div class="card-raised" style="margin-bottom: 14px;">
+                <div class="card-eyebrow">MACHINE IDENTITY</div>
+                <div style="margin-top: 10px;">
+                  <div style="font-size: 10.5px; color: var(--c-dim);">OPERATING SYSTEM</div>
+                  <div style="font-family: var(--f-mono); font-size: 11px; color: var(--c-text); margin-top: 2px;" id="settings-os-text">
+                    Windows (64-bit)
+                  </div>
+
+                  <div class="hairline"></div>
+
+                  <div style="font-size: 10.5px; color: var(--c-dim);">ROBLOX CONFIGURATION PATH</div>
+                  <div style="font-family: var(--f-mono); font-size: 10.5px; color: var(--c-text); margin-top: 2px;" id="settings-roblox-path-text">
+                    %LOCALAPPDATA%\Roblox\GlobalBasicSettings_13.xml
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-eyebrow">PRIVACY & INTEGRITY</div>
+                <h3 style="font-size: 14px; font-weight: 500; color: var(--c-text); margin: 6px 0 4px 0;">Local by default.</h3>
+                <div class="card-desc">
+                  No telemetry, no background network calls. The only outbound requests are the links you explicitly choose to open.
+                </div>
+                <div class="hairline"></div>
+                <div class="card-desc">
+                  Settings, snapshots, and logs stay on this machine. Original backups live in AppData and are never overwritten.
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Developer & Ecosystem -->
+            <div>
+              <div class="card-raised">
+                <div class="card-eyebrow">DEVELOPER</div>
+                <div style="font-family: var(--f-body); font-weight: 300; font-size: 24px; color: var(--c-text); margin-top: 8px;">
+                  Eska Stacy
+                </div>
+                <div style="font-size: 11px; color: var(--c-muted); margin-top: 2px;">
+                  EskaProject-X · @jar.ajhi_
+                </div>
+
+                <div class="hairline"></div>
+
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px;">
+                    <span style="color: var(--c-text);">Linktree</span>
+                    <button class="social-icon-btn" data-url="https://linktr.ee/eskastacy_" title="Linktree">
+                      <svg viewBox="0 0 24 24"><path d="M12 21V9 M12 9L5 3 M12 9V2.5 M12 9L19 3" /></svg>
+                    </button>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px;">
+                    <span style="color: var(--c-text);">WhatsApp Channel</span>
+                    <button class="social-icon-btn" data-url="https://whatsapp.com/channel/0029VbAowqoC1Fu3uTLcRe1n" title="WhatsApp Channel">
+                      <svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z M8.9 8c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.7 4.2 3.7 1.9.8 2.3.6 2.7.6.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1l-.6-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4z" /></svg>
+                    </button>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px;">
+                    <span style="color: var(--c-text);">TikTok</span>
+                    <button class="social-icon-btn" data-url="https://www.tiktok.com/@jarachyy_?_r=1&_t=ZS-99b76hsvJha" title="TikTok">
+                      <svg viewBox="0 0 24 24"><path d="M14.5 3v9.4a4.1 4.1 0 1 1-3.2-4 M14.5 3c.4 1.9 1.8 3.1 3.7 3.3" /></svg>
+                    </button>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px;">
+                    <span style="color: var(--c-text);">Discord</span>
+                    <button class="social-icon-btn" data-url="https://discord.gg/eZSNxNghu" title="Discord">
+                      <svg viewBox="0 0 24 24"><path d="M8.5 6.5c2.3-.7 4.7-.7 7 0 M7 18c-1.5-1.2-2.6-3-3-5.5.5-2.7 1.8-5 3.6-6.6l1.6-.6 1 1.7c1.2-.2 2.4-.2 3.6 0l1-1.7 1.6.6c1.8 1.6 3.1 3.9 3.6 6.6-.4 2.5-1.5 4.3-3 5.5l-1.6-2.2 M7 18l-1.5 2.5 M17 18l1.5 2.5 M9.5 12.5h.01 M14.5 12.5h.01" /></svg>
+                    </button>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px;">
+                    <span style="color: var(--c-text);">Instagram</span>
+                    <button class="social-icon-btn" data-url="https://www.instagram.com/jar.ajhi_" title="Instagram">
+                      <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z M12 8.5a3.5 3.5 0 1 0 .01 0z M17.2 6.8h.01" /></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="hairline"></div>
+                <div style="font-family: var(--f-mono); font-size: 10px; color: var(--c-dim);">
+                  Limiterizz.PX v1.0.0 · Stellary.PX Ecosystem
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ CONFIRMATION MODAL ============ -->
+  <div id="confirm-modal-overlay" class="modal-overlay">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-head-title">
+      <div class="modal-header-title" id="modal-head-title">Confirmation Required</div>
+      <div class="modal-message-body" id="modal-body-text">Are you sure you wish to proceed?</div>
+      <div class="modal-buttons-row">
+        <button class="btn-ghost" id="modal-cancel-btn">Cancel</button>
+        <button class="btn-danger" id="modal-confirm-btn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST NOTIFICATIONS ============ -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Main Renderer Script -->
+  <script src="scripts/renderer.js"></script>
+</body>
+</html>

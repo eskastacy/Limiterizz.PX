@@ -1,0 +1,48 @@
+'use strict';
+
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+
+test('FPS configuration, verified backups and restore use an isolated Roblox fixture', async t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'limiterizz-fps-'));
+  process.env.APPDATA = path.join(root, 'roaming');
+  process.env.LOCALAPPDATA = path.join(root, 'local');
+  const detector = require('../src/main/modules/roblox-detector');
+  const backups = require('../src/main/modules/backup-manager');
+  const fps = require('../src/main/modules/fps-unlocker');
+  const restore = require('../src/main/modules/system-restore');
+  const journal = require('../src/main/modules/change-journal');
+  const logger = require('../src/main/utils/logger');
+  for (const level of ['info', 'warn', 'error']) t.mock.method(logger, level, () => {});
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const game = path.join(process.env.LOCALAPPDATA, 'Roblox');
+  const config = path.join(game, 'GlobalBasicSettings_13.xml');
+  t.mock.method(detector, 'detectRoblox', async () => ({ installed: fs.existsSync(game), configExists: fs.existsSync(config), configPath: config, running: false }));
+  assert.equal((await fps.getFpsStatus()).status, 'not_found');
+  fs.mkdirSync(game, { recursive: true });
+  const original = '\uFEFF<roblox>\r\n<!-- <int name="FramerateCap">10</int> -->\r\n<Item class="UserGameSettings"><Properties><int name="FramerateCap"> 60 </int></Properties></Item></roblox>';
+  fs.writeFileSync(config, original);
+  assert.equal((await fps.getFpsStatus()).currentFps, 60);
+  await assert.rejects(fps.unlockFps(0), /integer/);
+  assert.equal(backups.listBackups().length, 0);
+  const first = await fps.unlockFps(9999);
+  assert.equal(first.isUnlocked, true);
+  assert.equal(fs.readFileSync(config, 'utf8'), original.replace(' 60 ', ' 9999 '));
+  assert.equal(fs.readFileSync(first.backupPath, 'utf8'), original);
+  const second = await fps.unlockFps(120);
+  assert.notEqual(first.backupPath, second.backupPath);
+  assert.equal(fs.readFileSync(second.backupPath, 'utf8'), original.replace(' 60 ', ' 9999 '));
+  assert.equal(fs.readFileSync(backups.getOriginalBackupPath(), 'utf8'), original);
+  assert.equal(journal.getUnrestoredEntries('fps').length, 2);
+  assert.equal((await restore.restoreFpsConfiguration()).success, true);
+  assert.equal(fs.readFileSync(config, 'utf8'), original);
+  assert.equal(backups.listBackups().length, 4);
+  assert.equal(journal.getUnrestoredEntries('fps').length, 0);
+  fs.writeFileSync(backups.getOriginalBackupPath(), '<invalid');
+  assert.equal((await fps.getFpsStatus()).backupAvailable, false);
+  await assert.rejects(fps.unlockFps(144), /invalid/);
+  assert.equal(fs.readFileSync(config, 'utf8'), original);
+});

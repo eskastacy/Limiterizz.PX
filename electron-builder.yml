@@ -1,0 +1,21 @@
+appId: com.eskaprojectx.limiterizz-px
+productName: Limiterizz.PX
+directories:
+  output: dist
+files:
+  - "src/**/*"
+  - "node_modules/**/*"
+  - "package.json"
+win:
+  target:
+    - portable
+    - nsis
+  icon: src/assets/logo.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+portable:
+  artifactName: "${productName}-Portable-${version}.${ext}"
+asar: true
