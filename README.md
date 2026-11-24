@@ -6,6 +6,22 @@ Unlock Roblox frame rate to 9999 FPS and optimize system latency with one click.
 
 ---
 
+## Interface & Menu Showcase
+
+| 01. Overview | 02. FPS Unlocker |
+| :---: | :---: |
+| ![Overview](docs/screenshots/01-overview.png) | ![FPS Unlocker](docs/screenshots/02-fps-unlocker.png) |
+
+| 03. Optimizer | 04. System Restore |
+| :---: | :---: |
+| ![Optimizer](docs/screenshots/03-optimizer.png) | ![System Restore](docs/screenshots/04-system-restore.png) |
+
+| 05. Change Journal | 06. Settings & About |
+| :---: | :---: |
+| ![Change Journal](docs/screenshots/05-change-journal.png) | ![Settings & About](docs/screenshots/06-settings-about.png) |
+
+---
+
 ## Features
 
 - **One-Click FPS Unlock**: Set Roblox frame rate cap to 9999 FPS instantly
